@@ -12,7 +12,7 @@ This backup system was originally created for personal server use and enhanced f
 - Prevents multiple backups from running simultaneously
 - Mount point validation before backup starts
 - Configurable per-backup settings
-- Notification by ntfy
+- Error notification by ntfy
 
 ## Files
 
