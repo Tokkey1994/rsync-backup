@@ -1,26 +1,30 @@
 [Unit]
 Description=Rsync Backup for %i
+# Wait for local filesystems to be mounted
 After=local-fs.target
+# Prefer network to be online but don't fail if unavailable
 Wants=network-online.target
 After=network-online.target
+# Send notification on backup failure
 OnFailure=notify-error@%n.service
 
 [Service]
 Type=oneshot
+# Load backup configuration from user's config directory
 EnvironmentFile=%h/.config/rsync-backup/%i.env
 
-# Resource limitations
+# Resource limitations - run with low priority to avoid system impact
 IOSchedulingClass=idle
 Nice=19
 MemoryMax=512M
 
-# Safety checks
+# Safety checks - verify prerequisites before backup
 ExecStartPre=/usr/bin/mountpoint -q $SOURCE
 ExecStartPre=/usr/bin/mountpoint -q $DESTINATION
 ExecStartPre=/usr/bin/bash -c 'test -n "$WAIT"'
 
-# Backup execution
+# Backup execution - use file lock to prevent concurrent runs
 ExecStart=/usr/bin/flock -w $WAIT /run/lock/rsync-backup.lock /usr/bin/rsync $RSYNC_OPTIONS $SOURCE $DESTINATION
 
-# Log identifier
+# Log identifier for easy filtering in journalctl
 SyslogIdentifier=rsync-backup-%i
