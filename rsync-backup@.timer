@@ -2,9 +2,7 @@
 Description=Timer for Rsync Backup %i
 
 [Timer]
-# Execute backup daily (default at 00:00)
 OnCalendar=daily
-# Randomize execution time up to 1 hour for load distribution
 RandomizedDelaySec=1h
 # Execute missed runs after system startup if system was down during scheduled time
 Persistent=true
