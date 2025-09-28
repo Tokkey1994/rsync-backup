@@ -2,9 +2,11 @@
 Description=Rsync Backup for %i
 # Wait for local filesystems to be mounted
 After=local-fs.target
+
 # Prefer network to be online but don't fail if unavailable
 Wants=network-online.target
 After=network-online.target
+
 # Send notification on backup failure
 OnFailure=notify-error@%n.service
 
