@@ -1,5 +1,6 @@
 [Unit]
 Description=Rsync Backup for %i
+
 # Wait for local filesystems to be mounted
 After=local-fs.target
 
@@ -12,6 +13,7 @@ OnFailure=notify-error@%n.service
 
 [Service]
 Type=oneshot
+
 # Load backup configuration from user's config directory
 EnvironmentFile=%h/.config/rsync-backup/%i.env
 
