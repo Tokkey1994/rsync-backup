@@ -2,4 +2,5 @@
 Description=Error notification for %i
 [Service]
 Type=oneshot
+# Send failure notification to ntfy.sh service with service name
 ExecStart=/usr/bin/curl -d "%i failed" ntfy.sh/hogehoge
