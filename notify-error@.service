@@ -1,0 +1,5 @@
+[Unit]
+Description=Error notification for %i
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/curl -d "%i failed" ntfy/hogehoge

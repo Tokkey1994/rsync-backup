@@ -1,0 +1,26 @@
+[Unit]
+Description=Rsync Backup for %i
+After=local-fs.target
+Wants=network-online.target
+After=network-online.target
+OnFailure=notify-error@%n.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/rsync-backup/%i.env
+
+# Resource limitations
+IOSchedulingClass=idle
+Nice=19
+MemoryMax=512M
+
+# Safety checks
+ExecStartPre=/usr/bin/mountpoint -q $SOURCE
+ExecStartPre=/usr/bin/mountpoint -q $DESTINATION
+ExecStartPre=/usr/bin/bash -c 'test -n "$WAIT"'
+
+# Backup execution
+ExecStart=/usr/bin/flock -w $WAIT /run/lock/rsync-backup.lock /usr/bin/rsync $RSYNC_OPTIONS $SOURCE $DESTINATION
+
+# Log identifier
+SyslogIdentifier=rsync-backup-%i
