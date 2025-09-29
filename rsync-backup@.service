@@ -29,6 +29,3 @@ ExecStartPre=/usr/bin/bash -c 'test -n "$WAIT"'
 
 # Backup execution - use file lock to prevent concurrent runs
 ExecStart=/usr/bin/flock -w $WAIT /run/lock/rsync-backup.lock /usr/bin/rsync $RSYNC_OPTIONS $SOURCE $DESTINATION
-
-# Log identifier for easy filtering in journalctl
-SyslogIdentifier=rsync-backup-%i
