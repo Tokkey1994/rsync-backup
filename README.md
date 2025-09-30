@@ -1,3 +1,8 @@
+# rsync-backup
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![systemd](https://img.shields.io/badge/systemd-based-green.svg)
+
 # Rsync Backup System
 
 A systemd-based backup storage solution using rsync with resource management and safety features.
