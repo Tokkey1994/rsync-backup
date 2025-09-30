@@ -85,12 +85,15 @@ systemctl --user status rsync-backup@documents.timer
 ## FAQ
 
 **Q: Can I backup subdirectories?**
+
 A: No, both SOURCE and DESTINATION must be mount points. This is a safety feature.
 
 **Q: What happens if a backup is already running?**
+
 A: The new backup will fail immediately due to file locking. No duplicate backups will run.
 
 **Q: How do I change the ntfy notification topic?**
+
 A: Edit the topic in `notify-error@.service`.
 
 ## License
