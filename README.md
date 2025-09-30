@@ -6,6 +6,13 @@ A systemd-based backup storage solution using rsync with resource management and
 
 This backup system was originally created for personal server use and enhanced for more reliable operation. It uses systemd templates to manage multiple backup configurations with proper resource controls.
 
+## Requirements
+
+- systemd-based Linux distribution
+- rsync installed
+- User systemd support enabled
+- Mount points for source and destination
+
 ## Features
 
 - Resource-friendly execution (low CPU/IO priority)
